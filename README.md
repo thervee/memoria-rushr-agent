@@ -56,3 +56,5 @@ Needs Node.js 20 or later. After changing the config, fully Quit Claude Desktop 
 - The Rushr wallet file (`%USERPROFILE%\.rushr\agent-wallet.json`) holds a private key. It is never copied here, opened, or shared.
 - **Never fund the wallet or register on Rushr without a clear, deliberate decision.** Registering signs a message and creates a live account.
 - Tokens on Robinhood Chain are extremely risky. **This is not financial advice.**
+
+License: MIT (see [LICENSE](LICENSE))
