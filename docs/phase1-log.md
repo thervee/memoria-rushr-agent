@@ -79,3 +79,39 @@ No `register`, no `recoverKey`, no funding, no signature, no `quote`, `buy`, `se
 - Paid actions used: 3 (find, save, find) → about 56 left.
 
 This closes gap 1 and gap 2 above: the memory is now in the hosted account, and the balance was checked.
+
+## Phase 2 — registration and first dry-run practice buy (2026-11-25)
+
+Times are UTC. No keys, names or locations.
+
+**05:46 UTC — `my_status` check.** `dryRun: true`, wallet `0x51CB4B0E07945aFdf9516443493E6A4f828d9d3C` (matches), `registered: false`, 0 ETH.
+
+**05:47 UTC — Login message previewed before signing.** Fetched a sample from `https://api.rushr.trade/v1/auth/nonce?address=…&purpose=register` (public, nothing signed). It is a Sign-In with Ethereum message: "Register this wallet on Rushr as an independent AI agent. I keep my own keys and sign my own transactions." URI `https://rushr.trade`, Chain ID 4663, 10-minute expiry, resource `https://rushr.trade/terms#agents`. Checked the `@rushr/mcp` 0.2.0 code: `register` only signs this message and posts it with the handle, display name and bio. No transaction, no gas, no token transfer. Approved in chat before signing.
+
+**05:48 UTC — Registered.** Dry-run was turned off only inside a separate, one-off Rushr process that made the single `register` call and then exited; the normal Rushr connection stayed in dry-run throughout.
+- Result: `status: registered`, handle `memoriaagent`, display name `Memoria Agent`, kind `agent`, not owned (independent).
+- The new Rushr API key was stored by Rushr inside `%USERPROFILE%\.rushr\agent-wallet.json` (not opened, not shown).
+- Public profile: `https://app.rushr.trade/u/memoriaagent` (works). The `https://rushr.trade/memoriaagent` link the tool prints returns 404, as expected.
+
+**05:49 UTC — Dry-run proven back on.** A fresh Rushr process with `RUSHR_DRY_RUN=1`: `dryRun: true`, `registered: true`, handle `memoriaagent`, 0 ETH, Season 0 rank 45 (agent rank 18), score 0.
+- Note: the Rushr connection that was already running in the app still showed `registered: false` until the app restarts (it read the wallet file before registration).
+
+**05:54 UTC — Practice buy, dry-run only (token CORBEL `0xaa1f4de6b9f7cdf11fb8aa97ce163d35d731cdb1`).**
+- Gap: the request asked for a token with locked liquidity. Rushr's tools, docs and public token data do not report liquidity locks, so this could not be checked for any token. Went ahead with CORBEL after approval in chat, with the lock marked "not verifiable".
+- `token`: migrated, `tradeVia: uniswap`, riskLevel low, no flags, not blocked; ~306 holders, top 10 ~24%, dev 0% with no past rugs, ~444 trades/24h, 3% buy and 3% sell tax, liquidity not reported.
+- `quote` ($1): ~0.000604 ETH in (ETH at $1,656), ~30,159 CORBEL out (min ~29,707), fee 25 bps, total impact ~401 bps (mostly the fixed tax), venue `uniswap-v4`. Live, it would be refused: wallet has 0 ETH.
+- `buy` ($1): `status: dry_run`, simulation ok (swap gas ~174,062). "RUSHR_DRY_RUN=1: built and simulated, nothing signed or sent."
+- Rushr warnings: live buy would be refused (0 ETH spendable after gas reserve); hooked Uniswap v4 pool, the hook may change fees or behaviour at swap time.
+- Journal entry: id `rushr:dryrun:0xaa1f4de6b9f7cdf11fb8aa97ce163d35d731cdb1:buy:1795586040517`, kind `trade`, `dryRun: true`, `action.tx: null`, summary "Simulated a buy of $1 of $CORBEL at $31.6K market cap, risk low, on uniswap-v4.", topic `rushr/trades`.
+
+**05:55 UTC — Saved to Memoria (hosted).**
+- `find_memory` for the journal id first: not saved yet (only the Phase 1 CORBEL note came back).
+- `save_memory`: private, topic `rushr/trades`, confidence `medium`. Note = Rushr's journal note plus the simulation result, registration, the hook warning; reason = why CORBEL, plus "liquidity lock could not be verified"; source = journal id + token link + `dryRun: true` + "simulated, no transaction hash" + profile link.
+
+| Journal id | Memoria memory_id | Verified |
+|---|---|---|
+| `rushr:dryrun:0xaa1f4de6b9f7cdf11fb8aa97ce163d35d731cdb1:buy:1795586040517` | `mem-101965bf8ddfde9d16fd255e1df79078` | yes |
+
+- `find_memory` to confirm: found it, **verified**. Paid Memoria actions this phase: 3.
+
+**Not done (on purpose):** no funding, no real buy or sell, no callouts, no tokens sent. Dry-run is on. Nothing pushed.
