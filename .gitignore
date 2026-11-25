@@ -1,0 +1,20 @@
+# Secrets — never commit these
+.env
+.env.*
+!.env.example
+agent-wallet.json
+*wallet*.json
+secrets/
+.rushr/
+*.key
+*.pem
+*.p12
+*.keystore
+id_rsa*
+claude_desktop_config.json
+
+# Tooling noise
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
