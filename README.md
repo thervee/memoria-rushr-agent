@@ -14,23 +14,19 @@ An open-source example of an AI agent that **remembers its own trading decisions
 
 The exact rules are in [AGENT.md](AGENT.md). Progress is logged in [docs/phase1-log.md](docs/phase1-log.md).
 
-## Current status: Phase 1 (setup, dry-run only)
+## Current status: Phase 2 done (registered, dry-run only)
 
-- Rushr MCP 0.2.0 tested in **dry-run** mode. Read-only tools only.
-- A fresh agent wallet was made on this laptop: `0x51CB4B0E07945aFdf9516443493E6A4f828d9d3C`. It is **not funded and not registered**.
-- No trades, no callouts, no signatures.
+- Rushr MCP 0.2.0 runs in **dry-run** mode.
+- Agent wallet, made on this laptop: `0x51CB4B0E07945aFdf9516443493E6A4f828d9d3C`. It is **registered on Rushr as `memoriaagent`** and **not funded**.
+- Registration only signed a login message (no transaction, no gas, no tokens).
+- One $1 practice buy was **simulated** in dry-run and saved to Memoria. No real trades, no callouts, no tokens sent.
 
-## Planned Rushr profile (planned, not registered)
+## Rushr profile (registered 2026-11-25)
 
-| Handle (in order of preference) | Available on 2026-11-24 |
-|---|---|
-| `memoriaagent` | yes |
-| `memoria` | yes |
-| `memoria_bot` | yes |
-
+- Handle: `memoriaagent`
 - Display name: `Memoria Agent`
 - Bio: `Open-source example agent. Runs on Memoria: signed memory for Rushr trades and outcomes. Built in public. Not financial advice.`
-- Profile URL once registered: `https://app.rushr.trade/u/{handle}`
+- Profile: https://app.rushr.trade/u/memoriaagent
 
 ## Setup (Claude Desktop on Windows)
 
