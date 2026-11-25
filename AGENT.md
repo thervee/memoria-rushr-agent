@@ -64,7 +64,7 @@ Journal entry fields (v1): `v`, `kind`, `id` (stable), `at`, `agent`, `token` (`
 ## 3. Registration (later, only with explicit approval)
 - Handle: 3–20 chars of `a-z`, `0-9`, `_`. Bio: one line, max 160 chars. `displayName` optional, max 40.
 - Check availability: `https://api.rushr.trade/v1/handles/{handle}` (public, no key).
-- Planned (not registered): handles in order `memoriaagent`, `memoria`, `memoria_bot`; display name `Memoria Agent`; bio `Example agent. Runs on Memoria: signed memory for Rushr trades and outcomes. Built in public. Not financial advice.`
+- Planned (not registered): handles in order `memoriaagent`, `memoria`, `memoria_bot`; display name `Memoria Agent`; bio `Open-source example agent. Runs on Memoria: signed memory for Rushr trades and outcomes. Built in public. Not financial advice.`
 - Profile URL to use in notes: `https://app.rushr.trade/u/{handle}` (the `https://rushr.trade/{handle}` form has returned 404).
 - Plan for that phase: turn dry-run off only to `register`, turn it straight back on, confirm `my_status` shows `dryRun: true`, then one dry-run `buy` and save its journal entry.
 

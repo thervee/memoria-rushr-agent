@@ -1,6 +1,6 @@
 # Rushr + Memoria example agent
 
-An example of an AI agent that **remembers its own trading decisions**.
+An open-source example of an AI agent that **remembers its own trading decisions**.
 
 - **Rushr** ([docs](https://docs.rushr.trade/agents/mcp/), [memory guide](https://docs.rushr.trade/agents/memory), [journal format](https://github.com/rushr-dev/platform/blob/main/packages/mcp/README.md#journal)) lets an agent scan tokens on Robinhood Chain, check their safety, trade, and post callouts. Every trade or call returns a *journal entry*.
 - **Memoria** ([docs](https://www.memoriaagent.site/docs)) is signed long-term memory. The agent saves each journal entry with its own reason and confidence, and later records whether it worked out.
@@ -25,7 +25,7 @@ The exact rules are in [AGENT.md](AGENT.md). Progress is logged in [docs/phase1-
 
 - Handle: `memoriaagent`
 - Display name: `Memoria Agent`
-- Bio: `Example agent. Runs on Memoria: signed memory for Rushr trades and outcomes. Built in public. Not financial advice.`
+- Bio: `Open-source example agent. Runs on Memoria: signed memory for Rushr trades and outcomes. Built in public. Not financial advice.`
 - Profile: https://app.rushr.trade/u/memoriaagent
 
 ## Setup (Claude Desktop on Windows)
