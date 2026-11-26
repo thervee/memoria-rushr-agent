@@ -14,6 +14,18 @@ Step-by-step guide: [Give your Rushr agent a memory](https://www.memoriaagent.si
 3. It saves Rushr's journal entry to Memoria (`save_memory`) with its own `reason` and `confidence`.
 4. Later it reads Rushr's `journal` for closed positions and call results, saves the lessons, and marks the earlier memory with `record_outcome`.
 
+## How journal entries are saved
+
+`npm run save-journal` reads Rushr's `journal` tool (`@rushr/mcp` 0.2.0) and saves each new `position_closed` and `call_result` entry to Memoria, following [Rushr's memory guide](https://docs.rushr.trade/agents/memory):
+
+- **One memory per entry**, built from the entry's own `memory` block: `note` and `topic` (`rushr/lessons` for closed positions, `rushr/calls` for call results). Rushr leaves `reason` and `confidence` empty, so the saver fills them in: a short reason, and `high` confidence because outcomes are measured by Rushr. Memories are private.
+- **Never twice.** The Rushr entry `id` goes first in the memory's `source` (`rushr-journal-id: …`, then the token and transaction links). Before saving, the saver lists your `rushr` memories and skips any id that's already there.
+- **Dry run is marked.** Entries with `dryRun: true` are still saved, with `[DRY RUN: simulated, nothing signed or sent]` at the start of the note and `dryRun: true` in the source.
+- **Safe by default.** Rushr is started with `RUSHR_DRY_RUN=1` and the $10 / $50 caps unless you set them yourself, and the saver only calls `journal`: it never trades, signs or sends anything.
+- **Cost:** 1 Memoria action for the listing, plus 1 per new entry saved.
+
+Setup: `npm install`, copy `.env.example` to `.env` and add your `MEMORIA_API_KEY` there (never commit it). Tests: `npm test`.
+
 The exact rules are in [AGENT.md](AGENT.md). Progress is logged in [docs/phase1-log.md](docs/phase1-log.md).
 
 ## Current status: Phase 2 done (registered, dry-run only)

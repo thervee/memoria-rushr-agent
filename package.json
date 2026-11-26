@@ -1,0 +1,19 @@
+{
+  "name": "memoria-rushr-agent",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Example agent: saves Rushr journal outcomes to Memoria as signed memories. Dry-run first. Not financial advice.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20.12"
+  },
+  "scripts": {
+    "save-journal": "node src/save-journal.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "@rushr/mcp": "0.2.0"
+  }
+}
